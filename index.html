@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pour toi, Papa 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1b1446; --bg2:#4b1d6e; --text:#fff; --gold:#ffd86b; --paper:#fff8e7; --ink:#4a3320;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg1:#120d33;--bg2:#36154f}}
+:root[data-theme="dark"]{--bg1:#120d33;--bg2:#36154f}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;height:100%;overflow:hidden;font-family:'Quicksand',system-ui,sans-serif;color:var(--text);
+  background:radial-gradient(circle at 50% 30%,var(--bg2),var(--bg1));}
+.stars{position:fixed;inset:0;background-image:radial-gradient(2px 2px at 20% 30%,#fff8,transparent),radial-gradient(2px 2px at 70% 20%,#fff8,transparent),radial-gradient(1.5px 1.5px at 40% 70%,#fff8,transparent),radial-gradient(2px 2px at 85% 60%,#fff8,transparent),radial-gradient(1.5px 1.5px at 10% 85%,#fff8,transparent);animation:tw 3s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.35}}
+
+/* ---------- Écran du début ---------- */
+#start{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;text-align:center;padding:20px}
+#start h2{font-family:'Pacifico',cursive;font-weight:400;font-size:26px;margin:0;color:var(--gold)}
+.tap{margin:0;font-weight:700;opacity:.85;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{50%{opacity:.35}}
+.env{position:relative;width:240px;height:160px;background:#f6dfb4;border-radius:10px;cursor:pointer;
+  box-shadow:0 20px 50px #0008,0 0 40px #ffd86b55;animation:float 2.2s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.env .flap{position:absolute;top:0;left:0;right:0;height:96px;background:#e6bf7c;clip-path:polygon(0 0,100% 0,50% 100%);border-radius:10px 10px 0 0}
+.env .seal{position:absolute;top:70px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:#e0334f;
+  display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 10px #0006}
+@keyframes float{50%{transform:translateY(-12px) rotate(-2deg)}}
+#start.charge .env{animation:charge 1.2s ease-in forwards}
+#start.charge .tap,#start.charge h2{opacity:0;transition:opacity .3s;animation:none}
+@keyframes charge{
+  0%{transform:translate(0,0) scale(1)}
+  20%{transform:translate(-4px,3px) scale(1.05) rotate(-2deg)}
+  40%{transform:translate(6px,-5px) scale(1.12) rotate(3deg)}
+  60%{transform:translate(-9px,6px) scale(1.2) rotate(-4deg);box-shadow:0 0 60px #fff,0 0 120px #ffd86b}
+  80%{transform:translate(12px,-8px) scale(1.32) rotate(5deg);box-shadow:0 0 100px #fff,0 0 200px #ffd86b}
+  100%{transform:translate(-14px,10px) scale(1.5) rotate(-6deg);box-shadow:0 0 160px 40px #fff,0 0 300px #fff}
+}
+
+/* ---------- Explosion : 2 moitiés blanches ---------- */
+.half{position:fixed;top:0;bottom:0;width:52%;background:#fff;z-index:100;visibility:hidden;transition:transform 1s cubic-bezier(.7,0,.2,1)}
+.half.l{left:0;clip-path:polygon(0 0,100% 0,90% 12%,100% 25%,88% 40%,98% 55%,86% 70%,97% 85%,90% 100%,0 100%)}
+.half.r{right:0;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%,12% 85%,3% 70%,14% 55%,2% 40%,12% 25%,0 12%)}
+.half.on{visibility:visible;animation:quake .09s linear infinite}
+.half.l.open{transform:translateX(-110%) rotate(-3deg);animation:none}
+.half.r.open{transform:translateX(110%) rotate(3deg);animation:none}
+@keyframes quake{
+  0%{translate:0 0}25%{translate:-9px 7px}50%{translate:8px -8px}75%{translate:-7px -5px}100%{translate:9px 6px}
+}
+#app.quake{animation:quake .08s linear infinite}
+
+/* ---------- Scène finale ---------- */
+#scene{position:fixed;inset:0;overflow-y:auto;visibility:hidden;padding:30px 18px 50px;text-align:center;-webkit-overflow-scrolling:touch}
+#scene.show{visibility:visible}
+#scene .wrap{max-width:420px;margin:0 auto}
+.cake{font-size:70px;display:inline-block;opacity:0}
+h1{font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(30px,9vw,44px);line-height:1.25;margin:8px 0 6px;
+  background:linear-gradient(90deg,#ffd86b,#ff8fb8,#ffd86b);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0}
+.sub{font-weight:700;font-size:18px;opacity:0;margin:0 0 26px}
+#scene.go .cake{animation:boom .9s cubic-bezier(.2,1.6,.4,1) forwards}
+#scene.go h1{animation:boom 1s .25s cubic-bezier(.2,1.6,.4,1) forwards}
+#scene.go .sub{animation:fadeup .8s 1s forwards}
+#scene.go .paper{animation:fadeup 1s 1.6s forwards}
+@keyframes boom{from{transform:scale(.1) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes fadeup{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.paper{opacity:0;background:var(--paper);color:var(--ink);border-radius:6px;padding:26px 22px 22px;text-align:left;
+  font-family:'Caveat',cursive;font-size:23px;line-height:1.45;box-shadow:0 18px 40px #0007;transform:rotate(-1.2deg);
+  background-image:repeating-linear-gradient(transparent,transparent 32px,#d9c9a233 33px)}
+.paper .to{font-weight:700;font-size:27px;margin-bottom:8px}
+.paper .sign{margin-top:14px;text-align:right;font-weight:700;font-size:26px}
+#typed{white-space:pre-wrap;min-height:150px}
+.balloon{position:fixed;bottom:-80px;font-size:44px;z-index:60;pointer-events:none;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-125vh) rotate(10deg)}}
+canvas{position:fixed;inset:0;z-index:70;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div id="app">
+  <div id="start">
+    <h2>Papa, j'ai un truc pour toi…</h2>
+    <div class="env" id="env"><div class="flap"></div><div class="seal">❤️</div></div>
+    <p class="tap">👆 Clique sur la lettre</p>
+  </div>
+
+  <div id="scene">
+    <div class="wrap">
+      <div class="cake">🎂</div>
+      <h1>Joyeux anniversaire Papaaaaa !!</h1>
+      <p class="sub">🎉 Aujourd'hui, c'est TON jour 🎉</p>
+      <div class="paper">
+        <div class="to">Cher Papa,</div>
+        <div id="typed"></div>
+        <div class="sign" id="sign"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="half l" id="hl"></div>
+<div class="half r" id="hr"></div>
+<canvas id="cv"></canvas>
+
+<script>
+// ✏️ Change ta lettre ici
+var LETTRE = "Merci pour tout ce que tu fais pour moi, tous les jours.\n\nTu as toujours été là, dans les bons comme dans les mauvais moments. Tu es mon modèle, mon pilier, et tu me rends fier d'être ton fils.\n\nTu es tout simplement le meilleur des papas. 🏆\n\nJe t'aime.";
+var SIGNATURE = "Ton fils ❤️";
+
+var $=function(i){return document.getElementById(i)};
+var cv=$('cv'), ctx=cv.getContext('2d'), parts=[], running=false;
+function size(){cv.width=innerWidth;cv.height=innerHeight}
+size(); addEventListener('resize',size);
+var COLORS=['#ffd86b','#ff8fb8','#7be0ff','#b79bff','#ffffff','#ff6b6b','#8affb0'];
+
+function burst(x,y,n,power){
+  for(var i=0;i<n;i++){
+    var a=Math.random()*Math.PI*2, v=(Math.random()*.7+.3)*power;
+    parts.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-power*.25,w:5+Math.random()*7,h:8+Math.random()*10,
+      r:Math.random()*6,vr:(Math.random()-.5)*.4,c:COLORS[Math.floor(Math.random()*COLORS.length)],life:260+Math.random()*120});
+  }
+  if(!running){running=true;loop();}
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(function(p){return p.life>0&&p.y<cv.height+30});
+  parts.forEach(function(p){
+    p.vy+=.18; p.vx*=.992; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life--;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle=p.c;
+    ctx.globalAlpha=Math.min(1,p.life/60); ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+  });
+  if(parts.length){requestAnimationFrame(loop)}else{running=false;ctx.clearRect(0,0,cv.width,cv.height)}
+}
+
+function balloons(){
+  var e=['🎈','🎈','🎈','🎉','🎁','⭐'];
+  setInterval(function(){
+    var b=document.createElement('div'); b.className='balloon';
+    b.textContent=e[Math.floor(Math.random()*e.length)];
+    b.style.left=Math.random()*92+'vw';
+    var d=6+Math.random()*5; b.style.animationDuration=d+'s';
+    document.body.appendChild(b); setTimeout(function(){b.remove()},d*1000);
+  },650);
+}
+
+function typeText(){
+  var el=$('typed'), i=0;
+  (function step(){
+    el.textContent=LETTRE.slice(0,++i);
+    if(i<LETTRE.length){setTimeout(step,36)}
+    else{$('sign').textContent=SIGNATURE; burst(cv.width/2,cv.height*.6,90,12);}
+    var sc=$('scene'); sc.scrollTop=sc.scrollHeight;
+  })();
+}
+
+var fired=false;
+$('env').addEventListener('click',function(){
+  if(fired)return; fired=true;
+  $('start').classList.add('charge');
+  setTimeout(function(){                       // 💥 flash blanc + tremblement
+    $('hl').classList.add('on'); $('hr').classList.add('on');
+    $('app').classList.add('quake');
+    $('scene').classList.add('show'); $('start').style.display='none';
+    if(navigator.vibrate){try{navigator.vibrate([80,40,80,40,160])}catch(e){}}
+  },1200);
+  setTimeout(function(){                       // l'écran s'ouvre
+    $('app').classList.remove('quake');
+    ['hl','hr'].forEach(function(i){var h=$(i);h.classList.remove('on');h.style.visibility='visible';h.classList.add('open')});
+    $('scene').classList.add('go');
+    burst(cv.width/2,cv.height/2,180,16);
+    setTimeout(function(){burst(cv.width*.2,cv.height*.5,70,13);burst(cv.width*.8,cv.height*.5,70,13)},350);
+    balloons();
+  },2300);
+  setTimeout(function(){$('hl').style.display='none';$('hr').style.display='none'},3500);
+  setTimeout(typeText,3000);
+});
+</script>
+</body>
+</html>
